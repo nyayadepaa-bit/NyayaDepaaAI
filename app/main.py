@@ -265,12 +265,6 @@ COMMON_FOLLOWUPS: list[dict] = [
         "free_text": False,
     },
     {
-        "key": "language",
-        "question": "Which language would you prefer for our conversation?",
-        "options": ["English", "Hindi", "Tamil", "Telugu", "Kannada", "Marathi", "Bengali", "Gujarati"],
-        "free_text": False,
-    },
-    {
         "key": "state",
         "question": "Which state are you in? This helps me give you location-specific legal information.",
         "options": [
@@ -419,13 +413,9 @@ def get_deep_dive_steps(situation: str) -> list[dict]:
 
 
 def get_next_deep_dive_step(session: dict) -> dict | None:
-    """Return the next unanswered question in the deep-dive sequence.
-    Skips the language question if language was already set at login."""
+    """Return the next unanswered question in the deep-dive sequence."""
     situation = session["profile"].get("situation_type", "Other / Not Sure")
     for step in get_deep_dive_steps(situation):
-        # Skip language question if already captured from login form
-        if step["key"] == "language" and session["profile"].get("language"):
-            continue
         if step["key"] not in session["profile"]:
             return step
     return None
@@ -1014,12 +1004,6 @@ async def chat(request: ChatRequest):
         if current_step:
             key = current_step["key"]
             session["profile"][key] = None if q in ("__skip__", "") else q
-
-            # Lock language immediately when selected
-            if key == "language" and session["profile"].get("language"):
-                session["language"] = session["profile"]["language"]
-                lang = session["language"]
-                logger.info(f"[{session_id[:8]}] Language locked -> '{lang}'")
 
             next_step = get_next_deep_dive_step(session)
             if next_step:

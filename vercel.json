@@ -8,15 +8,15 @@
     ],
     "routes": [
         {
+            "handle": "filesystem"
+        },
+        {
             "src": "/admin/(.*)",
             "dest": "/public/admin/index.html"
         },
         {
             "src": "/static/(.*)",
             "dest": "/public/static/$1"
-        },
-        {
-            "handle": "filesystem"
         },
         {
             "src": "/(.*)",
