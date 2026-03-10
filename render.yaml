@@ -1,29 +1,55 @@
-# render.yaml — Render Blueprint for NyayaDepaaAI Auth Backend
-# Deploy: connect GitHub repo → Render auto-detects this file
-# Or manually create a Web Service pointing to auth_app/backend/
+# render.yaml — Render Blueprint for NyayaDepaaAI
+# Two services: Auth Backend + AI Chatbot
+# NOTE: Set secret env vars via Render Dashboard > Environment
 
 services:
+  # ── Service 1: Auth Backend (login, admin dashboard API) ──
   - type: web
     name: nyayadepaaai-api
     runtime: python
-    region: singapore          # closest to Neon DB in ap-southeast-1
-    plan: free                 # free tier (upgrade later)
+    region: singapore
+    plan: free
     rootDir: auth_app/backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT --workers 2
     envVars:
       - key: DATABASE_URL
-        value: "postgresql+asyncpg://neondb_owner:npg_EvAn6UBPHTW5@ep-withered-scene-a1oimtu5-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
+        sync: false     # Set in Render Dashboard
       - key: JWT_SECRET_KEY
-        value: "717d633a27dde74c64967d38711a9fce"
+        sync: false
       - key: ADMIN_EMAIL
-        value: "nyayadepaa@gmail.com"
+        sync: false
       - key: ADMIN_PASSWORD
-        value: "Adminlogin@12345678"
+        sync: false
       - key: ALLOWED_ORIGINS
         value: "https://nyayadepaaai.vercel.app"
       - key: FRONTEND_URL
         value: "https://nyayadepaaai.vercel.app"
+      - key: PYTHON_VERSION
+        value: "3.10.0"
+    healthCheckPath: /api/health
+
+  # ── Service 2: AI Chatbot (legal advisor RAG pipeline) ──
+  - type: web
+    name: nyayadepaaai-chat
+    runtime: python
+    region: singapore
+    plan: free
+    buildCommand: pip install -r ai_requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+    envVars:
+      - key: PINECONE_API_KEY
+        sync: false     # Set in Render Dashboard
+      - key: PINECONE_INDEX_NAME
+        value: "nyayadepaa"
+      - key: JINA_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
       - key: PYTHON_VERSION
         value: "3.10.0"
     healthCheckPath: /api/health

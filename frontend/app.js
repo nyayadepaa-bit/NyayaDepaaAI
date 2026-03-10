@@ -39,7 +39,7 @@
 
     // ── API ───────────────────────────────────────────────
     async function apiChat(query) {
-        const res = await fetch('/api/chat', {
+        const res = await fetch(`${CHAT_API}/api/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query, session_id: state.sessionId, language: languageSelect.value }),
@@ -49,7 +49,7 @@
     }
 
     async function apiClarify(originalQuery, intent) {
-        const res = await fetch('/api/clarify', {
+        const res = await fetch(`${CHAT_API}/api/clarify`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -240,6 +240,11 @@
     const AUTH_API = window.location.hostname === 'localhost'
         ? 'http://localhost:8001/api'
         : 'https://nyayadepaaai-api.onrender.com/api';
+
+    // Chat API: Render AI service in production, localhost:8000 for local dev
+    const CHAT_API = window.location.hostname === 'localhost'
+        ? ''
+        : 'https://nyayadepaaai-chat.onrender.com';
 
     // ── Login overlay elements ──
     const cbLoginOverlay = $('#cb-login-overlay');
@@ -536,7 +541,7 @@
         cbShowTyping();
 
         try {
-            const res = await fetch('/api/new_session', {
+            const res = await fetch(`${CHAT_API}/api/new_session`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -576,7 +581,7 @@
         cbShowTyping();
 
         try {
-            const res = await fetch('/api/chat', {
+            const res = await fetch(`${CHAT_API}/api/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

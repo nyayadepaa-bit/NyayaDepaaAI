@@ -38,7 +38,7 @@ from case_analysis.pinecone_predictor import PineconePredictionEngine
 logger = logging.getLogger(__name__)
 
 # Path for continuous learning store
-PATTERN_STORE = Path("d:/LegalLlama3/data/case_patterns.jsonl")
+PATTERN_STORE = Path(__file__).resolve().parent.parent / "data" / "case_patterns.jsonl"
 SIMILARITY_THRESHOLD = 0.90  # If cosine sim < this, store as new pattern
 
 # Pinecone prediction engine instance

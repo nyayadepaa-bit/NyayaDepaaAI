@@ -25,9 +25,14 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, RedirectResponse
 
 # Case Analysis Integration
-from case_analysis.analyzer import CasePipeline
-from case_analysis.reasoning import extract_judge_statements
-case_pipeline = CasePipeline()
+try:
+    from case_analysis.analyzer import CasePipeline
+    from case_analysis.reasoning import extract_judge_statements
+    case_pipeline = CasePipeline()
+except Exception as _e:
+    logging.warning(f"Case analysis unavailable: {_e}")
+    case_pipeline = None
+    def extract_judge_statements(*a, **kw): return {}
 from pydantic import BaseModel, Field
 from app.config import FRONTEND_DIR, GROQ_API_KEY, PINECONE_API_KEY, JINA_API_KEY, PDF_DIR
 from app.legal_agent import LegalResearchAgent
