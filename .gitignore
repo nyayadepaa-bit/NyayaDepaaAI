@@ -1,0 +1,36 @@
+.vercel
+.env*.local
+.env
+.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Node
+node_modules/
+dist/
+
+# Vite cache
+.vite/
+
+# Large data / models
+pdfs/
+chroma_db/
+data/*.jsonl
+data/*.json
+*.sqlite3
+
+# Build artifacts
+public/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temp
+test_llm_out*.txt
+_analyze_*.py
+_analyze_*.txt

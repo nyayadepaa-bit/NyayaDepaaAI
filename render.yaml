@@ -1,0 +1,29 @@
+# render.yaml — Render Blueprint for NyayaDepaaAI Auth Backend
+# Deploy: connect GitHub repo → Render auto-detects this file
+# Or manually create a Web Service pointing to auth_app/backend/
+
+services:
+  - type: web
+    name: nyayadepaaai-api
+    runtime: python
+    region: singapore          # closest to Neon DB in ap-southeast-1
+    plan: free                 # free tier (upgrade later)
+    rootDir: auth_app/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT --workers 2
+    envVars:
+      - key: DATABASE_URL
+        value: "postgresql+asyncpg://neondb_owner:npg_EvAn6UBPHTW5@ep-withered-scene-a1oimtu5-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
+      - key: JWT_SECRET_KEY
+        value: "717d633a27dde74c64967d38711a9fce"
+      - key: ADMIN_EMAIL
+        value: "nyayadepaa@gmail.com"
+      - key: ADMIN_PASSWORD
+        value: "Adminlogin@12345678"
+      - key: ALLOWED_ORIGINS
+        value: "https://nyayadepaaai.vercel.app"
+      - key: FRONTEND_URL
+        value: "https://nyayadepaaai.vercel.app"
+      - key: PYTHON_VERSION
+        value: "3.10.0"
+    healthCheckPath: /api/health

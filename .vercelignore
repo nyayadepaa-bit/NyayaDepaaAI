@@ -1,0 +1,32 @@
+# Large directories not needed for deployment
+pdfs/
+chroma_db/
+data/
+pipeline/
+case_analysis/
+retrieval/
+app/
+Continued_PreTraining/
+Supervised_FineTuning/
+RAG_Pipeline/
+Evaluation/
+utils/
+{Continued_PreTraining,Supervised_FineTuning,RAG_Pipeline,Evaluation,utils,data/
+
+# Node modules (npm install runs during build)
+auth_app/frontend/node_modules/
+
+# Cache / temp
+__pycache__/
+*.pyc
+.vite/
+*.egg-info/
+
+# Test files
+test_llm_out.txt
+test_llm_out2.txt
+
+# Docker files
+auth_app/docker-compose.yml
+auth_app/Dockerfile
+auth_app/nginx.conf

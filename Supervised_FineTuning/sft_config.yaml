@@ -1,0 +1,68 @@
+# ============================================================
+# Supervised Fine-Tuning Configuration
+# Fill all ### PLACEHOLDERS ### before running
+# ============================================================
+
+model:
+  # Path to the model output from CPT phase (or use base LLaMA 3 directly)
+  base_model_id: "../outputs/cpt_model"             # ### CPT MODEL OUTPUT PATH ###
+  # base_model_id: "meta-llama/Meta-Llama-3-8B"     # uncomment to skip CPT
+  torch_dtype: "bfloat16"
+  use_flash_attention: true
+  trust_remote_code: true
+
+quantization:
+  load_in_4bit: true
+  bnb_4bit_compute_dtype: "bfloat16"
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_use_double_quant: true
+
+lora:
+  r: 32
+  lora_alpha: 64
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  lora_dropout: 0.1
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+data:
+  prediction_train:   "../data/processed/sft_prediction_train.jsonl"
+  prediction_val:     "../data/processed/sft_prediction_validation.jsonl"
+  explanation_train:  "../data/processed/sft_explanation_train.jsonl"
+  explanation_val:    "../data/processed/sft_explanation_validation.jsonl"
+  qa_train:           "../data/processed/sft_qa_train.jsonl"
+  qa_val:             "../data/processed/sft_qa_validation.jsonl"
+  max_seq_length: 4096
+  dataset_num_proc: 4
+
+training:
+  # Output directories per task
+  prediction_output_dir:  "../outputs/sft_prediction"
+  explanation_output_dir: "../outputs/sft_explanation"
+  qa_output_dir:          "../outputs/sft_qa"
+
+  num_train_epochs: 5
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 8
+  learning_rate: 1.0e-4
+  lr_scheduler_type: "cosine"
+  warmup_ratio: 0.05
+  weight_decay: 0.01
+  fp16: false
+  bf16: true
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 100
+  save_total_limit: 2
+  evaluation_strategy: "steps"
+  load_best_model_at_end: true
+  metric_for_best_model: "eval_loss"
+  report_to: "wandb"
