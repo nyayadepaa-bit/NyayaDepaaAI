@@ -1,34 +1,34 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "public/**",
-            "use": "@vercel/static"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/admin/assets/(.*)",
-            "dest": "/public/admin/assets/$1"
-        },
-        {
-            "src": "/admin/logo\\.(png|svg)",
-            "dest": "/public/admin/logo.$1"
-        },
-        {
-            "src": "/admin/(.*)",
-            "dest": "/public/admin/index.html"
-        },
-        {
-            "src": "/static/(.*)",
-            "dest": "/public/static/$1"
-        },
-        {
-            "handle": "filesystem"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/public/index.html"
-        }
-    ]
+  "version": 2,
+  "buildCommand": "python build.py",
+  "outputDirectory": "public",
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://nyayadepaaai-api.onrender.com/api/$1"
+    },
+    {
+      "src": "/admin/assets/(.*)",
+      "dest": "/admin/assets/$1"
+    },
+    {
+      "src": "/admin/logo\\.(png|svg)",
+      "dest": "/admin/logo.$1"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "/admin/index.html"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
