@@ -1,7 +1,11 @@
 {
   "version": 2,
-  "buildCommand": "python build.py",
-  "outputDirectory": "public",
+  "builds": [
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
@@ -9,26 +13,26 @@
     },
     {
       "src": "/admin/assets/(.*)",
-      "dest": "/admin/assets/$1"
+      "dest": "/public/admin/assets/$1"
     },
     {
       "src": "/admin/logo\\.(png|svg)",
-      "dest": "/admin/logo.$1"
+      "dest": "/public/admin/logo.$1"
     },
     {
       "src": "/admin/(.*)",
-      "dest": "/admin/index.html"
+      "dest": "/public/admin/index.html"
     },
     {
       "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "dest": "/public/static/$1"
     },
     {
       "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/public/index.html"
     }
   ]
 }

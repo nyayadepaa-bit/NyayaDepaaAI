@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NyayaDepaaAI — Women Safety & Rights Legal Advisor</title>
+    <meta name="description"
+        content="AI-powered Women Safety Legal Advisor. Get empathetic, accurate guidance on women's rights under Indian law.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="/static/logo.png" type="image/png">
+    <link rel="stylesheet" href="/static/index.css">
+</head>
+
+<body>
+    <!-- ── Hidden Legacy Elements (Required by app.js) ── -->
+    <div id="legacy-elements" style="display: none;">
+        <div id="sidebar"></div>
+        <div id="sidebar-overlay"></div>
+        <button id="btn-hamburger"></button>
+        <button id="btn-new-session"></button>
+        <button id="btn-cta-chat"></button>
+        <button id="btn-cta-learn"></button>
+        <span id="status-text"></span>
+        <div id="status-pill"></div>
+        <div id="history-list"></div>
+        <span id="consulting-domain"></span>
+        <div id="welcome-view"></div>
+    </div>
+
+    <!-- ── Quick Exit Bar ── -->
+    <div class="quick-exit-bar">
+        <span>⚠️ Need to leave quickly? Press ESC or click this button.</span>
+        <button class="btn-quick-exit">QUICK EXIT</button>
+    </div>
+
+    <!-- ── Navbar ── -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="/static/logo.png" alt="NyayaDepaaAI" class="nav-logo">
+            <span class="nav-name">NyayaDepaaAI</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">Legal AI</a>
+            <a href="#">BNS Insights</a>
+            <a href="#">Safety</a>
+            <button class="btn-consult-ai" id="btn-consult-ai">Consult AI</button>
+            <a href="/admin/login" class="nav-admin-link" title="Admin Login">Admin</a>
+        </div>
+        <!-- hidden language holder for legacy code -->
+        <select id="language-select" style="display:none;">
+            <option value="English">English</option>
+        </select>
+    </nav>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title slide-up">Empowering Your Voice<br>with <span class="text-gradient">Legal
+                    Precision</span></h1>
+            <p class="hero-subtitle slide-up fade-delay-1">NyayaDepaaAI: Your AI Legal Associate for women's rights in
+                India,<br>providing Bharatiya Nyaya Sanhita (BNS) backed guidance with absolute privacy.</p>
+            <button class="btn-outline slide-up fade-delay-2" id="btn-how-works">Learn about BNS</button>
+
+
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-content slide-left">
+                <h2 class="features-title">The AI Associate that<br><span>Knows the Law.</span></h2>
+
+                <div class="feature-item">
+                    <div class="feature-icon bg-purple-light">📚</div>
+                    <div class="feature-text">
+                        <h3>BNS Citation-Backed</h3>
+                        <p>Every response is cross-referenced with the latest Bharatiya Nyaya Sanhita statutes, ensuring
+                            your guidance is accurate and up-to-date.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon bg-purple-light">🛤️</div>
+                    <div class="feature-text">
+                        <h3>Decision Pathways</h3>
+                        <p>Complex legal procedures are broken down into simple, actionable decision trees. Know your
+                            next steps clearly from filing an FIR to court appearance.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon bg-purple-light">⚡</div>
+                    <div class="feature-text">
+                        <h3>Instant Guidance</h3>
+                        <p>Emergency situations require immediate clarity. Our AI provides 24/7 real-time support for
+                            urgent legal queries regarding women's safety.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Solutions Section -->
+        <section class="solutions-section">
+            <div class="solutions-header slide-up">
+                <h2>Modern Solutions for Your Security</h2>
+                <p>Innovative safety features designed specifically for the unique challenges Indian women face in legal
+                    navigation.</p>
+            </div>
+            <div class="solutions-grid">
+                <div class="solution-card hover-up slide-up">
+                    <div class="sol-icon">🎙️</div>
+                    <h3>Voice-First Navigation</h3>
+                    <p>Speak your queries in Hindi, English, or Regional languages. Designed for ease of use in
+                        stressful situations.</p>
+                </div>
+                <div class="solution-card hover-up slide-up fade-delay-1">
+                    <div class="sol-icon">👁️‍🗨️</div>
+                    <h3>Incognito Consultation</h3>
+                    <p>Auto-clear history and incognito mode are active by default. No digital footprint is left on your
+                        device after a session.</p>
+                </div>
+                <div class="solution-card hover-up slide-up fade-delay-2">
+                    <div class="sol-icon">🗺️</div>
+                    <h3>Legal Resource Map</h3>
+                    <p>Locate the nearest Mahila Police Thana or legal aid centers with verified contact information.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section slide-up">
+            <div class="cta-container">
+                <h2>Ready to secure your legal rights?</h2>
+                <p>Join thousands of women who have found clarity and strength through NyayaDepaaAI's expert AI
+                    guidance.
+                </p>
+                <button class="btn-primary" id="btn-start-chat">Start My Free Consultation</button>
+                <div class="cta-badges">
+                    <span><span class="badge-icon green">✅</span> Verified BNS 2024</span>
+                    <span><span class="badge-icon green">🔒</span> Completely Confidential</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── Footer ── -->
+    <footer class="site-footer">
+        <div class="footer-brand">
+            <img src="/static/logo.png" alt="NyayaDepaaAI" class="nav-logo"> <span class="nav-name">NyayaDepaaAI</span>
+        </div>
+        <div class="footer-copy">
+            © 2026 NyayaDepaaAI. Providing AI-driven legal assistance across India. Non-substitution for professional
+            legal counsel.
+        </div>
+        <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+    </footer>
+
+    <!-- ── Chatbot Blur Overlay & PDF Modal ── -->
+    <div id="chatbot-blur-overlay" class="chatbot-blur-overlay"></div>
+
+    <div id="pdf-modal" class="pdf-modal">
+        <div class="pdf-modal-icon">📄</div>
+        <h3>Save Conversation?</h3>
+        <p>Would you like to download a PDF copy of this conversation, including your highlighted legal rights and next
+            steps?</p>
+        <div class="pdf-modal-actions">
+            <button id="btn-pdf-download" class="btn-pdf-download">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download PDF & End
+            </button>
+            <button class="btn-pdf-close" id="btn-pdf-close">End Without Saving</button>
+            <button class="btn-pdf-cancel" id="btn-pdf-cancel">Cancel, return to chat</button>
+        </div>
+    </div>
+
+    <!-- ═══ FLOATING CHATBOT WIDGET (UNTOUCHED) ═══ -->
+    <button class="chatbot-launcher" id="chatbot-launcher" title="Chat with NyayaDepaaAI Assistant">
+        <div class="chatbot-icon-open" id="chatbot-icon-open"
+            style="width: 100%; height: 100%; border-radius: 50%; background: url('/static/avatar.jpg') no-repeat; background-size: 260%; background-position: 18% 12%;">
+        </div>
+        <div class="chatbot-icon-namaste" id="chatbot-icon-namaste"
+            style="display:none; width:100%; height:100%; border-radius:50%; background: url('/static/avatar.jpg') no-repeat; background-size: 180%; background-position: 50% 25%;">
+            <span style="position:absolute; bottom:2px; right:2px; font-size:20px; line-height:1;">🙏</span>
+        </div>
+    </button>
+
+    <div class="chatbot-panel" id="chatbot-panel">
+        <div class="chatbot-header">
+            <div class="chatbot-header-info">
+                <img src="/static/logo.png" alt="NyayaDepaaAI" class="chatbot-header-icon">
+                <div>
+                    <div class="chatbot-header-title">NyayaDepaaAI Assistant</div>
+                    <div class="chatbot-header-sub">Legal guidance · Always here for you</div>
+                </div>
+            </div>
+            <button class="chatbot-close" id="chatbot-close" title="Close">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- ── Login Gate Overlay ── -->
+        <div class="cb-login-overlay" id="cb-login-overlay">
+            <button class="cb-login-close" id="cb-login-close-btn" title="Close" type="button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            <div class="cb-login-card">
+                <div class="cb-login-icon"><img src="/static/logo.png" alt="NyayaDepaaAI"
+                        style="width:28px;height:28px;"></div>
+                <h3 class="cb-login-title">NyayaDepaaAI</h3>
+                <p class="cb-login-subtitle">Confidential legal guidance for women.<br>Enter your details to begin.</p>
+
+                <form id="cb-login-form" autocomplete="off">
+                    <div class="cb-login-field">
+                        <label for="cb-login-name">Name</label>
+                        <input type="text" id="cb-login-name" placeholder="Your full name" required minlength="2"
+                            maxlength="120" />
+                    </div>
+                    <div class="cb-login-row">
+                        <div class="cb-login-field cb-login-half">
+                            <label for="cb-login-age">Age</label>
+                            <input type="number" id="cb-login-age" placeholder="Age" required min="1" max="150" />
+                        </div>
+                        <div class="cb-login-field cb-login-half">
+                            <label for="cb-login-city">City</label>
+                            <input type="text" id="cb-login-city" placeholder="Your city" required minlength="2"
+                                maxlength="120" />
+                        </div>
+                    </div>
+
+                    <div class="cb-login-divider"><span>preferences</span></div>
+
+                    <div class="cb-login-field">
+                        <label for="cb-login-lang">Language</label>
+                        <select id="cb-login-lang" class="cb-login-select">
+                            <option value="English">English</option>
+                            <option value="Hindi">हिन्दी</option>
+                            <option value="Marathi">मराठी</option>
+                            <option value="Tamil">தமிழ்</option>
+                            <option value="Telugu">తెలుగు</option>
+                            <option value="Bengali">বাংলা</option>
+                            <option value="Kannada">ಕನ್ನಡ</option>
+                            <option value="Gujarati">ગુજરાતી</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="cb-login-btn" id="cb-login-btn">
+                        Begin Consultation <span class="cb-login-arrow">→</span>
+                    </button>
+                    <p class="cb-login-note">🔒 Completely confidential · Personalized to you</p>
+                </form>
+                <div class="cb-login-error" id="cb-login-error" style="display:none;"></div>
+            </div>
+        </div>
+
+        <div class="chatbot-messages" id="chatbot-messages"></div>
+
+        <div class="chatbot-input-bar" id="chatbot-input-bar">
+            <input type="text" class="chatbot-input" id="chatbot-input" placeholder="Type your message…"
+                maxlength="2000" autocomplete="off" />
+            <button class="chatbot-send" id="chatbot-send" title="Send">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- ── Scripts ── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/app.js"></script>
+    <script>
+        // Quick exit handler
+        document.querySelector('.btn-quick-exit').addEventListener('click', () => {
+            window.location.replace('https://www.google.com');
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.replace('https://www.google.com');
+            }
+        });
+
+        // Trigger chatbot from buttons
+        document.getElementById('btn-consult-ai').addEventListener('click', (e) => {
+            e.preventDefault();
+            const launcher = document.getElementById('chatbot-launcher');
+            if (!launcher.classList.contains('active')) launcher.click();
+        });
+
+        document.getElementById('btn-start-chat').addEventListener('click', (e) => {
+            e.preventDefault();
+            const launcher = document.getElementById('chatbot-launcher');
+            if (!launcher.classList.contains('active')) launcher.click();
+        });
+
+        // Scroll Reveal Animation Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target); // Optional: animate only once
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.slide-up, .slide-left, .slide-right, .hover-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>

@@ -24,7 +24,6 @@ data/*.json
 *.sqlite3
 
 # Build artifacts
-public/
 
 # OS
 Thumbs.db

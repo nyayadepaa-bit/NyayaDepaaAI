@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="currentColor">
+  <!-- Gavel head -->
+  <rect x="22" y="8" width="52" height="18" rx="3" transform="rotate(-45 48 17)"/>
+  <!-- Gavel handle -->
+  <rect x="38" y="32" width="10" height="42" rx="3" transform="rotate(-45 43 53)"/>
+  <!-- Base stand (trapezoid) -->
+  <rect x="58" y="76" width="12" height="10" rx="2"/>
+  <!-- Base platform -->
+  <rect x="48" y="86" width="32" height="8" rx="2"/>
+</svg>

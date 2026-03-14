@@ -11,12 +11,34 @@ Assembles the public/ directory with:
 import shutil
 import subprocess
 import os
+import shutil as _shutil
+import sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PUBLIC = os.path.join(ROOT, "public")
 FRONTEND_SRC = os.path.join(ROOT, "frontend")
 ADMIN_SRC = os.path.join(ROOT, "auth_app", "frontend")
 ADMIN_DIST = os.path.join(ADMIN_SRC, "dist")
+
+
+def get_npm_command():
+    """Return a callable npm command for the current platform."""
+    if os.name == "nt":
+        candidates = [
+            _shutil.which("npm.cmd"),
+            _shutil.which("npm"),
+            r"C:\Program Files\nodejs\npm.cmd",
+        ]
+    else:
+        candidates = [_shutil.which("npm")]
+
+    for candidate in candidates:
+        if candidate and os.path.exists(candidate):
+            return [candidate]
+
+    raise FileNotFoundError(
+        "npm executable not found. Install Node.js or add npm to PATH before running build.py."
+    )
 
 def main():
     # Clean
@@ -26,8 +48,9 @@ def main():
 
     # 1. Build React admin app
     print("==> Building React admin frontend...")
-    subprocess.run(["npm", "install"], cwd=ADMIN_SRC, check=True)
-    subprocess.run(["npm", "run", "build"], cwd=ADMIN_SRC, check=True)
+    npm_cmd = get_npm_command()
+    subprocess.run(npm_cmd + ["install"], cwd=ADMIN_SRC, check=True)
+    subprocess.run(npm_cmd + ["run", "build"], cwd=ADMIN_SRC, check=True)
 
     # 2. Copy main landing page assets to public/static/
     print("==> Copying main site assets to public/static/...")

@@ -1,8 +1,11 @@
 import axios from 'axios'
 
-const API_BASE = window.location.hostname === 'localhost'
+const ENV_API_BASE = import.meta.env.VITE_API_BASE_URL
+const DEFAULT_API_BASE = window.location.hostname === 'localhost'
     ? '/api'
     : 'https://nyayadepaaai-api.onrender.com/api'
+
+const API_BASE = (ENV_API_BASE || DEFAULT_API_BASE).replace(/\/$/, '')
 
 const api = axios.create({ baseURL: API_BASE })
 
