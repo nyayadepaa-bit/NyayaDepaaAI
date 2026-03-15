@@ -9,6 +9,8 @@ export function AuthProvider({ children }) {
 
     // Restore session on mount
     useEffect(() => {
+        api.get('/health').catch(() => {})
+
         const token = localStorage.getItem('access_token')
         if (token) {
             api.get('/user/me')

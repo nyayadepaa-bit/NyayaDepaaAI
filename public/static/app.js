@@ -246,6 +246,23 @@
         ? ''
         : 'https://nyayadepaaai-chat.onrender.com';
 
+    let backendsWarmed = false;
+
+    function fireAndForget(url) {
+        fetch(url, {
+            method: 'GET',
+            cache: 'no-store',
+            keepalive: true,
+        }).catch(() => { /* warm-up is best-effort */ });
+    }
+
+    function warmBackends() {
+        if (backendsWarmed) return;
+        backendsWarmed = true;
+        fireAndForget(`${AUTH_API}/health`);
+        fireAndForget(`${CHAT_API}/api/health`);
+    }
+
     // ── Login overlay elements ──
     const cbLoginOverlay = $('#cb-login-overlay');
     const cbLoginForm = $('#cb-login-form');
@@ -523,6 +540,7 @@
     });
 
     cbLauncher.addEventListener('click', () => {
+        warmBackends();
         if (cbState.open) promptCloseChat();
         else cbToggle();
     });
@@ -778,5 +796,7 @@
     btnPdfCancel.addEventListener('click', () => {
         pdfModal.classList.remove('active');
     });
+
+    warmBackends();
 
 })();
